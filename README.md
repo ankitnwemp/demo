@@ -8,16 +8,16 @@ This project is a serverless airline booking application built using AWS service
 
 ```mermaid
 graph TD;
-    A[API Gateway] --> B[Lambda Functions];
-    B --> C[DynamoDB];
-    B --> D[S3];
-    D --> E[CloudFront];
-    B --> F[SNS];
-    B --> G[SQS];
-    B --> H[Cognito];
-    H --> A;
-    I[Route 53] --> A;
-    J[CloudWatch] --> B;
+    A[API Gateway] -->|1| B[Lambda Functions];
+    B -->|2| C[DynamoDB];
+    B -->|3| D[S3];
+    D -->|4| E[CloudFront];
+    B -->|5| F[SNS];
+    B -->|6| G[SQS];
+    B -->|7| H[Cognito];
+    H -->|8| A;
+    I[Route 53] -->|9| A;
+    J[CloudWatch] -->|10| B;
 ```
 
 The architecture of this application is designed to leverage AWS services for scalability, reliability, and cost-effectiveness. The main components include:
