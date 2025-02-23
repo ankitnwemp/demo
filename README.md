@@ -1,43 +1,41 @@
 # Project Overview
 
-This project is an AWS foundational architecture for generative AI applications. It provides a robust framework for building and deploying AI-driven solutions with key features such as scalability, security, and ease of integration.
+This project is an AWS foundational architecture for generative AI applications. It provides a robust framework for building and deploying AI-driven solutions.
 
-- **Key Features and Benefits**:
-  - Scalable architecture leveraging AWS services
-  - Secure data handling and processing
-  - Flexible integration with various AI models
+## Key Features and Benefits
+- Scalable and flexible architecture
+- Integration with AWS services for enhanced capabilities
+- Designed for high performance and security
 
-- **Target Audience and Use Cases**:
-  - AI developers and data scientists
-  - Enterprises looking to integrate AI into their workflows
-  - Use cases include natural language processing, image recognition, and more.
+## Target Audience and Use Cases
+- AI researchers and developers
+- Enterprises looking to integrate AI solutions
+- Use cases include natural language processing, image recognition, and more.
 
 # Architecture Overview
 
-## System Architecture Diagram
+## Logical & Technical Architecture
 ```mermaid
 graph TD;
     A[User] -->|Interacts with| B[Admin UI];
     B -->|Uses| C[SDK];
     C -->|Communicates with| D[Services];
     D -->|Processes| E[Data];
-    E -->|Stored in| F[S3 Bucket];
-    D -->|Logs to| G[CloudWatch];
 ```
 
-## Description of Each Major Component
-- **Admin UI**: Provides a user-friendly interface for managing AI workflows.
-- **SDK**: Facilitates communication with backend services.
-- **Services**: Core processing units handling AI tasks.
-- **Data Storage**: Utilizes AWS S3 for scalable storage.
+## Description of Major Components
+- **Admin UI**: User interface for managing AI models and data.
+- **SDK**: Provides tools and libraries for interacting with the platform.
+- **Services**: Backend services for processing and managing data.
 
-## Flow of Data and Interactions
-Data flows from the user interface through the SDK to backend services, where it is processed and stored in AWS S3. Logs and metrics are captured in AWS CloudWatch.
+## Data Flow and Interactions
+- User inputs are processed through the Admin UI and SDK.
+- Data is managed and processed by backend services.
 
 ## Key AWS Services Utilized
-- **Amazon S3**: For data storage
-- **AWS Lambda**: For serverless processing
-- **Amazon CloudWatch**: For monitoring and logging
+- Amazon S3 for storage
+- AWS Lambda for serverless computing
+- Amazon RDS for database management
 
 # Repository Structure
 
@@ -48,57 +46,49 @@ Data flows from the user interface through the SDK to backend services, where it
 │   ├── frontend/
 │   └── backend/
 ├── sdk/
-├── services/
-└── docs/
+└── services/
 ```
 
-## Purpose of Each Major Directory
+## Purpose of Major Directories
 - **admin-ui/**: Contains the frontend and backend for the admin interface.
-- **sdk/**: Provides the software development kit for interacting with services.
-- **services/**: Houses the core AI processing services.
-- **docs/**: Documentation and guides.
+- **sdk/**: Includes the software development kit for interacting with the platform.
+- **services/**: Houses the core backend services.
 
 ## Key Configuration Files
-- **nuxt.config.ts**: Configuration for the Nuxt.js frontend.
-- **config.py**: Backend configuration settings.
+- `nuxt.config.ts`: Configuration for the Nuxt.js frontend.
+- `requirements.txt`: Python dependencies for the backend.
 
 # Prerequisites
 
 ## Required AWS Services and Permissions
-- Access to AWS S3, Lambda, and CloudWatch
-- IAM roles with permissions for these services
+- Access to Amazon S3, AWS Lambda, and Amazon RDS
+- IAM roles with necessary permissions
 
 ## Development Environment Setup
 - Node.js and npm for frontend development
-- Python 3.x for backend services
+- Python and pip for backend development
 
 ## Required IAM Roles and Policies
-- Roles for accessing S3, Lambda, and CloudWatch
+- Roles for accessing AWS services securely
 
 ## Dependencies and Software Versions
-- Node.js 14.x
+- Node.js v14.x
 - Python 3.8
 
 # Installation & Deployment
 
 ## Step-by-Step Setup Instructions
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd <project-directory>
-   ```
+1. Clone the repository and navigate to the project directory.
+2. Install dependencies using `pip install -r sdk/reqs.txt`.
 
 ## Environment Variables Configuration
-- Set up a `.env` file with AWS credentials and other necessary variables.
+- Set up a `.env` file with necessary credentials.
 
 ## AWS Resources Provisioning Steps
-- Use AWS CloudFormation or Terraform to provision resources.
+- Use AWS CloudFormation or Terraform for resource provisioning.
 
 ## Local Development Setup
-- Run the frontend and backend locally using npm and Python.
+- Run the frontend and backend locally for development.
 
 ## Production Deployment Guide
 - Deploy using AWS Elastic Beanstalk or AWS Lambda.
@@ -106,84 +96,59 @@ Data flows from the user interface through the SDK to backend services, where it
 # Component Details
 
 ## Admin UI
-- **Purpose**: Provides a web interface for managing AI tasks.
+- **Purpose**: Provides a user interface for managing AI models.
 - **Internal Architecture**: Built with Nuxt.js and Tailwind CSS.
-- **Configuration Options**: Defined in `nuxt.config.ts`.
 
 ## SDK
-- **Purpose**: Facilitates API communication.
-- **Internal Architecture**: Python-based with RESTful endpoints.
+- **Purpose**: Offers tools for developers to interact with the platform.
+- **Configuration Options**: Customizable via environment variables.
 
 ## Services
-- **Purpose**: Core AI processing.
-- **Internal Architecture**: Microservices architecture using AWS Lambda.
+- **Purpose**: Backend processing and data management.
+- **API Endpoints**: Exposed via RESTful APIs.
 
 # Security Considerations
 
 ## Authentication and Authorization
-- Uses AWS Cognito for user management.
+- Utilizes AWS Cognito for user management.
 
 ## Data Encryption
-- Data encrypted at rest in S3 and in transit.
+- Data encrypted at rest and in transit using AWS KMS.
 
 ## Network Security
-- VPC setup for secure networking.
-
-## Best Practices Implemented
-- Regular security audits and updates.
+- VPC setup with security groups and NACLs.
 
 # Performance & Scalability
 
 ## Performance Optimization Techniques
-- Caching strategies using AWS ElastiCache.
+- Caching strategies using Amazon ElastiCache.
 
 ## Scaling Strategies
-- Auto-scaling groups for Lambda functions.
-
-## Resource Requirements
-- Defined in AWS CloudFormation templates.
-
-## Monitoring and Metrics
-- Utilizes AWS CloudWatch for real-time monitoring.
+- Auto-scaling groups for dynamic resource allocation.
 
 # Development Guide
 
 ## Code Organization
-- Follows MVC pattern for frontend and microservices for backend.
+- Modular structure with clear separation of concerns.
 
 ## Coding Standards
-- Adheres to PEP 8 for Python and ESLint for JavaScript.
+- Follows PEP 8 for Python and ESLint for JavaScript.
 
 ## Testing Strategy
 - Unit and integration tests using PyTest and Jest.
 
-## CI/CD Pipeline Setup
-- Configured with AWS CodePipeline.
-
-## Contributing Guidelines
-- Refer to `CONTRIBUTING.md` for detailed guidelines.
-
 # Troubleshooting
 
 ## Common Issues and Solutions
-- Refer to the `docs/troubleshooting.md` for common issues.
-
-## Logging and Monitoring
-- Logs available in AWS CloudWatch.
-
-## Debug Procedures
-- Use AWS X-Ray for tracing.
+- Refer to the `docs/troubleshooting.md` for detailed solutions.
 
 # Examples & Usage
 
 ## Sample Use Cases
-- NLP tasks, image recognition, etc.
+- NLP model deployment and usage.
 
 ## Code Examples
-- Refer to `examples/` directory for sample code.
-
-## API Usage Examples
-- Detailed in `docs/api.md`.
+- Refer to `examples/` directory for sample scripts.
 
 # License & Attribution
 
@@ -191,7 +156,7 @@ Data flows from the user interface through the SDK to backend services, where it
 - Licensed under the MIT License.
 
 ## Third-Party Dependencies
-- Listed in `package.json` and `requirements.txt`.
+- Lists all third-party libraries and their licenses.
 
 ## Credits and Acknowledgments
-- Contributions from the open-source community. 
+- Acknowledges contributors and third-party tools. 
