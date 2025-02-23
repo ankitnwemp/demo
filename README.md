@@ -1,119 +1,199 @@
-# Combined PII and Geo Detector
+# Generative AI Application
 
-This project provides a Python class `CombinedPIIGeoDetector` that detects and anonymizes Personally Identifiable Information (PII) from text using regular expressions and the spaCy library.
+## Overview
+This project is a comprehensive generative AI application designed to process documents, manage prompts, and interact with AI models. It leverages AWS services for scalable and secure operations, including microservices, storage, and authentication mechanisms.
 
 ## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Features](#features)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Examples](#examples)
-6. [Architecture](#architecture)
-7. [Components](#components)
-8. [Use Cases](#use-cases)
-9. [Troubleshooting](#troubleshooting)
-10. [Contributing](#contributing)
-11. [License](#license)
-12. [Contact](#contact)
-
-## Introduction
-
-The `CombinedPIIGeoDetector` is designed to identify and anonymize various types of PII in text data. It leverages regular expressions for pattern matching and spaCy for advanced text processing, making it suitable for applications that require data privacy and protection.
+- [Features](#features)
+- [Architecture](#architecture)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
+- [Development](#development)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Monitoring](#monitoring)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Security](#security)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
 
 ## Features
-
-- **Detection of PII**: Identifies phone numbers, email addresses, credit card numbers, national IDs, IP addresses, and more.
-- **Anonymization**: Replaces detected PII with anonymized tokens while preserving the original format.
-- **Advanced Text Processing**: Utilizes spaCy for natural language processing tasks.
-
-## Installation
-
-1. **Prerequisites**: Python 3.6 or later.
-2. **Steps**: Install the required Python packages.
-
-   ```bash
-   pip install spacy
-   python -m spacy download en_core_web_trf
-   ```
-
-## Usage
-
-To use the `CombinedPIIGeoDetector`, initialize the detector and call its methods to detect and anonymize PII in text.
-
-## Examples
-
-Here's a step-by-step example demonstrating how to use the `CombinedPIIGeoDetector` class:
-
-```python
-from latest import CombinedPIIGeoDetector
-
-# Initialize the detector
-detector = CombinedPIIGeoDetector()
-
-# Sample text containing PII
-text = "Contact me at john.doe@example.com or +1-800-555-0199."
-
-# Detect PII in the text
-pii_entities = detector.detect_pii(text)
-print("Detected PII:")
-print(detector.format_detected_pii(pii_entities))
-
-# Anonymize the detected PII in the text
-anonymized_text = detector.anonymize_other_sensitive_info(text)
-print("\nAnonymized Text:")
-print(anonymized_text)
-```
-
-### Expected Output
-
-```
-Detected PII:
-Email Addresses:
-  - john.doe@example.com
-Phone Numbers:
-  - +1-800-555-0199
-
-Anonymized Text:
-Contact me at anonymised_email or anonymised_international_phone
-```
+- Document processing and chunking
+- Vectorization and model invocation
+- Prompt management and storage
 
 ## Architecture
+This section provides a high-level overview of the system architecture.
 
-The architecture of the `CombinedPIIGeoDetector` involves initializing the detector, detecting PII using regex patterns, and anonymizing the detected PII.
-
+### System Components
 ```mermaid
-graph TD;
-    A[Initialize Detector] --> B[Detect PII];
-    B --> C[Anonymize PII];
-    C --> D[Format Detected PII];
+flowchart TB
+    Client[Client Applications]
+    API[API Gateway]
+    Auth[Auth Service]
+    DB[(Database)]
+    Cache[(Cache)]
+    Queue[(Message Queue)]
+    Worker[Worker Service]
+    
+    Client --> API
+    API --> Auth
+    API --> DB
+    API --> Cache
+    API --> Queue
+    Queue --> Worker
+    Worker --> DB
 ```
 
-## Components
+### Data Flow
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant A as API
+    participant D as Database
+    participant W as Worker
+    
+    C->>A: Request Data
+    A->>D: Query
+    D->>A: Response
+    A->>W: Process Task
+    W->>D: Update Status
+    A->>C: Return Result
+```
 
-- **Regex Patterns**: Used for detecting specific PII types.
-- **spaCy Model**: Utilized for text processing tasks.
-- **Validation Functions**: Ensure the detected PII meets specific criteria.
+### Deployment Architecture
+```mermaid
+flowchart LR
+    subgraph Cloud
+        LB[Load Balancer]
+        subgraph App Cluster
+            API1[API Server 1]
+            API2[API Server 2]
+        end
+        subgraph Data Layer
+            Primary[(Primary DB)]
+            Replica[(Replica DB)]
+            Cache[(Redis Cache)]
+        end
+    end
+    
+    Users[Users] --> LB
+    LB --> API1
+    LB --> API2
+    API1 --> Primary
+    API2 --> Primary
+    Primary --> Replica
+    API1 --> Cache
+    API2 --> Cache
+```
 
-## Use Cases
+## Prerequisites
+- Node.js v18+
+- AWS CLI configured
+- Docker
 
-- **Data Privacy**: Anonymize sensitive information in documents.
-- **Text Analysis**: Preprocess text data by removing PII.
-- **Customer Support**: Redact sensitive information from communications.
+## Installation
+```bash
+# Clone the repository
+git clone <repository-url>
+cd <repository-directory>
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+```
+
+## Configuration
+1. `DATABASE_URL`: Connection string for the database
+2. `API_KEY`: Authentication key for external services
+3. `PORT`: Server port (default: 3000)
+
+## Usage
+```javascript
+// Basic usage example
+const client = new ProjectClient();
+const result = await client.doSomething();
+```
+
+## API Documentation
+### Endpoint: `GET /api/v1/resource`
+- Description: Retrieves resource data
+- Parameters:
+  - `id` (required): Resource identifier
+  - `fields` (optional): Comma-separated list of fields
+- Response format:
+  ```json
+  {
+    "id": "string",
+    "name": "string",
+    "status": "string"
+  }
+  ```
+
+## Development
+1. Development prerequisites
+2. Code style guidelines
+3. Branch naming conventions
+4. Commit message format
+5. Pull request process
+
+## Testing
+```bash
+# Run unit tests
+npm test
+
+# Run integration tests
+npm run test:integration
+
+# Generate test coverage report
+npm run test:coverage
+```
+
+## Deployment
+1. Pre-deployment checklist
+2. Deployment steps
+3. Post-deployment verification
+4. Rollback procedures
+
+## Monitoring
+1. Available metrics
+2. Log locations
+3. Health check endpoints
+4. Alert configurations
 
 ## Troubleshooting
-
-- **Model Not Found**: Ensure the spaCy model is installed using `python -m spacy download en_core_web_trf`.
-- **Regex Mismatches**: Verify the regex patterns in the `self.patterns` dictionary.
+1. Problem: Description of common issue
+   - Cause: Likely cause
+   - Solution: Steps to resolve
 
 ## Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests
+5. Submit a pull request
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Security
+- Security policy
+- Vulnerability reporting process
+- Security best practices
+- Access control information
 
 ## License
+This project is licensed under the [LICENSE NAME] - see the [LICENSE.md](LICENSE.md) file for details.
 
-This project is licensed under the MIT License.
+## Acknowledgments
+- Credit to contributors
+- Third-party libraries used
+- Related projects or inspirations
 
-## Contact
+---
+**Note**: Customize this template by removing unnecessary sections or adding specific ones based on your project's needs. Keep documentation clear, concise, and up-to-date.
 
-For any questions or issues, please contact the project maintainer. 
+Last Updated: [DATE] 
