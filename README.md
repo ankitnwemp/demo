@@ -1,162 +1,113 @@
 # Project Overview
 
-This project is an AWS foundational architecture for generative AI applications. It provides a robust framework for building and deploying AI-driven solutions.
-
-## Key Features and Benefits
-- Scalable and flexible architecture
-- Integration with AWS services for enhanced capabilities
-- Designed for high performance and security
+## Purpose and Key Features
+This project provides a foundational architecture for generative AI applications on AWS, offering scalability, flexibility, and integration with AWS services.
 
 ## Target Audience and Use Cases
 - AI researchers and developers
-- Enterprises looking to integrate AI solutions
-- Use cases include natural language processing, image recognition, and more.
+- Enterprises integrating AI solutions
+- Use cases: NLP, image recognition, etc.
 
-# Architecture Overview
+## Tech Stack Overview
+- Frontend: Nuxt.js, Tailwind CSS
+- Backend: Python, FastAPI
+- AWS Services: S3, Lambda, RDS
 
-## Logical & Technical Architecture
+# Architecture Documentation
+
+## A. Logical Architecture Diagram
 ```mermaid
 graph TD;
-    A[User] -->|Interacts with| B[Admin UI];
-    B -->|Uses| C[SDK];
-    C -->|Communicates with| D[Services];
-    D -->|Processes| E[Data];
+    A[User] -->|Request| B[Admin UI];
+    B -->|Process| C[SDK];
+    C -->|Invoke| D[Services];
+    D -->|Response| A;
+    subgraph Core Entities
+    E[Data] --> F[Models];
+    end
+    G[API Gateway] --> H[Lambda Functions];
+    I[Business Rules] --> J[Validations];
 ```
 
-## Description of Major Components
-- **Admin UI**: User interface for managing AI models and data.
-- **SDK**: Provides tools and libraries for interacting with the platform.
-- **Services**: Backend services for processing and managing data.
-
-## Data Flow and Interactions
-- User inputs are processed through the Admin UI and SDK.
-- Data is managed and processed by backend services.
-
-## Key AWS Services Utilized
-- Amazon S3 for storage
-- AWS Lambda for serverless computing
-- Amazon RDS for database management
-
-# Repository Structure
-
-## Tree View
-```
-.
-├── admin-ui/
-│   ├── frontend/
-│   └── backend/
-├── sdk/
-└── services/
+## B. Technical Data Flow Diagram
+```mermaid
+graph LR;
+    subgraph Ingestion
+    A[User Input] --> B[API Gateway]
+    end
+    subgraph Processing
+    B --> C[Lambda Functions]
+    C --> D[Data Processing]
+    end
+    subgraph Storage
+    D --> E[S3 Bucket]
+    F[RDS] --> G[Data Warehouse]
+    end
+    H[Security] --> I[Monitoring]
+    J[Scaling] --> K[Auto-scaling]
 ```
 
-## Purpose of Major Directories
-- **admin-ui/**: Contains the frontend and backend for the admin interface.
-- **sdk/**: Includes the software development kit for interacting with the platform.
-- **services/**: Houses the core backend services.
+# Setup & Installation
 
-## Key Configuration Files
-- `nuxt.config.ts`: Configuration for the Nuxt.js frontend.
-- `requirements.txt`: Python dependencies for the backend.
+## Prerequisites
+- AWS account with access to S3, Lambda, RDS
+- Node.js v14.x, Python 3.8
 
-# Prerequisites
-
-## Required AWS Services and Permissions
-- Access to Amazon S3, AWS Lambda, and Amazon RDS
-- IAM roles with necessary permissions
-
-## Development Environment Setup
-- Node.js and npm for frontend development
-- Python and pip for backend development
-
-## Required IAM Roles and Policies
-- Roles for accessing AWS services securely
-
-## Dependencies and Software Versions
-- Node.js v14.x
-- Python 3.8
-
-# Installation & Deployment
-
-## Step-by-Step Setup Instructions
+## Step-by-Step Installation
 1. Clone the repository and navigate to the project directory.
 2. Install dependencies using `pip install -r sdk/reqs.txt`.
 
-## Environment Variables Configuration
-- Set up a `.env` file with necessary credentials.
+## Configuration Details
+- Set up a `.env` file with AWS credentials.
 
-## AWS Resources Provisioning Steps
-- Use AWS CloudFormation or Terraform for resource provisioning.
+# Usage Guide
 
-## Local Development Setup
-- Run the frontend and backend locally for development.
+## Basic Usage Examples
+- Refer to `examples/` for sample scripts.
 
-## Production Deployment Guide
-- Deploy using AWS Elastic Beanstalk or AWS Lambda.
+## Common Scenarios
+- Deploying NLP models using the SDK.
 
-# Component Details
+## API Documentation
+- Detailed API docs available in `docs/api.md`.
 
-## Admin UI
-- **Purpose**: Provides a user interface for managing AI models.
-- **Internal Architecture**: Built with Nuxt.js and Tailwind CSS.
+# Development
 
-## SDK
-- **Purpose**: Offers tools for developers to interact with the platform.
-- **Configuration Options**: Customizable via environment variables.
+## Local Setup
+- Run frontend and backend locally for development.
 
-## Services
-- **Purpose**: Backend processing and data management.
-- **API Endpoints**: Exposed via RESTful APIs.
+## Testing
+- Use PyTest for backend and Jest for frontend.
 
-# Security Considerations
-
-## Authentication and Authorization
-- Utilizes AWS Cognito for user management.
-
-## Data Encryption
-- Data encrypted at rest and in transit using AWS KMS.
-
-## Network Security
-- VPC setup with security groups and NACLs.
-
-# Performance & Scalability
-
-## Performance Optimization Techniques
-- Caching strategies using Amazon ElastiCache.
-
-## Scaling Strategies
-- Auto-scaling groups for dynamic resource allocation.
-
-# Development Guide
-
-## Code Organization
-- Modular structure with clear separation of concerns.
-
-## Coding Standards
-- Follows PEP 8 for Python and ESLint for JavaScript.
-
-## Testing Strategy
-- Unit and integration tests using PyTest and Jest.
+## Contributing Guidelines
+- Refer to `CONTRIBUTING.md` for contribution details.
 
 # Troubleshooting
 
-## Common Issues and Solutions
-- Refer to the `docs/troubleshooting.md` for detailed solutions.
+## Common Issues
+- Refer to `docs/troubleshooting.md` for solutions.
 
-# Examples & Usage
+## Debug Procedures
+- Use logging and monitoring tools for debugging.
 
-## Sample Use Cases
-- NLP model deployment and usage.
+## Support Contacts
+- Contact support at `support@example.com`.
 
-## Code Examples
-- Refer to `examples/` directory for sample scripts.
+# Security & Performance
 
-# License & Attribution
+## Security Features
+- AWS Cognito for authentication.
+
+## Performance Optimization
+- Use caching strategies with Amazon ElastiCache.
+
+## Best Practices
+- Follow AWS security best practices.
+
+# License & Credits
 
 ## License Information
 - Licensed under the MIT License.
 
-## Third-Party Dependencies
-- Lists all third-party libraries and their licenses.
-
-## Credits and Acknowledgments
+## Acknowledgments
 - Acknowledges contributors and third-party tools. 
