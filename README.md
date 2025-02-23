@@ -1,128 +1,41 @@
-# Generative AI Application
+# Project Name
 
-## Overview
-This project is a comprehensive generative AI application designed to process documents, manage prompts, and interact with AI models. It leverages AWS services for scalable and secure operations, including microservices, storage, and authentication mechanisms.
+## Introduction
+This project is a Generative AI application built on the GenAI Foundational Platform. It provides a suite of services for vectorization, document processing, model invocation, and prompt management.
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd <project-directory>
+   ```
+3. Install the required dependencies:
+   ```bash
+   pip install -r sdk/reqs.txt
+   ```
+
+## Usage
+- To get started with the SDK, refer to the `quickstart-sdk.ipynb` notebook in the `sdk/` directory.
+- Ensure you have a `.env` file with the necessary environment variables for authentication and API access.
 
 ## Architecture
 ### Logical Architecture
-This section provides a high-level overview of the system architecture.
-
-```mermaid
-flowchart TB
-    Client[Client Applications]
-    API[API Gateway]
-    Auth[Auth Service]
-    DB[(Database)]
-    Cache[(Cache)]
-    Queue[(Message Queue)]
-    Worker[Worker Service]
-    
-    Client --> API
-    API --> Auth
-    API --> DB
-    API --> Cache
-    API --> Queue
-    Queue --> Worker
-    Worker --> DB
-```
+![Logical Architecture](image/logical_architecture.png)
 
 ### Technical Architecture
-The technical architecture is based on AWS services, including VPC, ECS, and more.
+![Technical Architecture](image/technical_architecture.png)
 
-```mermaid
-flowchart LR
-    subgraph Cloud
-        LB[Load Balancer]
-        subgraph App Cluster
-            API1[API Server 1]
-            API2[API Server 2]
-        end
-        subgraph Data Layer
-            Primary[(Primary DB)]
-            Replica[(Replica DB)]
-            Cache[(Redis Cache)]
-        end
-    end
-    
-    Users[Users] --> LB
-    LB --> API1
-    LB --> API2
-    API1 --> Primary
-    API2 --> Primary
-    Primary --> Replica
-    API1 --> Cache
-    API2 --> Cache
-```
-
-## Installation
-### Prerequisites
-- Node.js v18+
-- AWS CLI configured
-- Docker
-
-### Steps
-```bash
-# Clone the repository
-git clone <repository-url>
-cd <repository-directory>
-
-# Install dependencies
-npm install
-
-# Set up environment variables
-cp .env.example .env
-```
-
-## Usage
-```javascript
-// Basic usage example
-const client = new ProjectClient();
-const result = await client.doSomething();
-```
-
-## API Documentation
-Refer to the `api_docs.html` in the `docs/api_docs` directory for API documentation rendered using Swagger UI.
-
-## Development
-- Follow the code style guidelines.
-- Use branch naming conventions.
-- Ensure all tests pass before submitting a pull request.
-
-## Testing
-```bash
-# Run unit tests
-npm test
-
-# Run integration tests
-npm run test:integration
-
-# Generate test coverage report
-npm run test:coverage
-```
-
-## Deployment
-- Follow the pre-deployment checklist.
-- Use `cdk deploy` for deploying the stack.
-
-## Monitoring
-- Use CloudWatch for monitoring.
-- Set up alerts for critical metrics.
-
-## Troubleshooting
-- Refer to the troubleshooting guide for common issues and solutions.
+## Services Overview
+- **Vectorization**: Handles vector store and index creation, vectorization, and semantic search.
+- **Document Processing**: Manages file registration, extraction, and chunking.
+- **Model Invocation**: Provides methods to list and invoke models with prompts.
+- **Prompt Management**: Manages prompt templates, including creation and retrieval.
 
 ## Contributing
-- Fork the repository and create a feature branch.
-- Make your changes and run tests.
-- Submit a pull request.
+Please refer to the `CONTRIBUTING.md` file for guidelines on contributing to this project.
 
 ## License
-This project is licensed under the [LICENSE NAME] - see the [LICENSE.md](LICENSE.md) file for details.
-
-## Acknowledgments
-- Credit to contributors
-- Third-party libraries used
-- Related projects or inspirations
-
----
-**Note**: Customize this template by removing unnecessary sections or adding specific ones based on your project's needs. Keep documentation clear, concise, and up-to-date. 
+This project is licensed under the terms of the LICENSE file. 
