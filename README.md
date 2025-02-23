@@ -1,9 +1,87 @@
-# Project Name
+# Project Overview
 
-## Introduction
-This project is a Generative AI application built on the GenAI Foundational Platform. It provides a suite of services for vectorization, document processing, model invocation, and prompt management.
+This project is an AWS foundational architecture for generative AI applications. It provides a robust framework for building and deploying AI-driven solutions with key features such as scalability, security, and ease of integration.
 
-## Installation
+- **Key Features and Benefits**:
+  - Scalable architecture leveraging AWS services
+  - Secure data handling and processing
+  - Flexible integration with various AI models
+
+- **Target Audience and Use Cases**:
+  - AI developers and data scientists
+  - Enterprises looking to integrate AI into their workflows
+  - Use cases include natural language processing, image recognition, and more.
+
+# Architecture Overview
+
+## System Architecture Diagram
+```mermaid
+graph TD;
+    A[User] -->|Interacts with| B[Admin UI];
+    B -->|Uses| C[SDK];
+    C -->|Communicates with| D[Services];
+    D -->|Processes| E[Data];
+    E -->|Stored in| F[S3 Bucket];
+    D -->|Logs to| G[CloudWatch];
+```
+
+## Description of Each Major Component
+- **Admin UI**: Provides a user-friendly interface for managing AI workflows.
+- **SDK**: Facilitates communication with backend services.
+- **Services**: Core processing units handling AI tasks.
+- **Data Storage**: Utilizes AWS S3 for scalable storage.
+
+## Flow of Data and Interactions
+Data flows from the user interface through the SDK to backend services, where it is processed and stored in AWS S3. Logs and metrics are captured in AWS CloudWatch.
+
+## Key AWS Services Utilized
+- **Amazon S3**: For data storage
+- **AWS Lambda**: For serverless processing
+- **Amazon CloudWatch**: For monitoring and logging
+
+# Repository Structure
+
+## Tree View
+```
+.
+├── admin-ui/
+│   ├── frontend/
+│   └── backend/
+├── sdk/
+├── services/
+└── docs/
+```
+
+## Purpose of Each Major Directory
+- **admin-ui/**: Contains the frontend and backend for the admin interface.
+- **sdk/**: Provides the software development kit for interacting with services.
+- **services/**: Houses the core AI processing services.
+- **docs/**: Documentation and guides.
+
+## Key Configuration Files
+- **nuxt.config.ts**: Configuration for the Nuxt.js frontend.
+- **config.py**: Backend configuration settings.
+
+# Prerequisites
+
+## Required AWS Services and Permissions
+- Access to AWS S3, Lambda, and CloudWatch
+- IAM roles with permissions for these services
+
+## Development Environment Setup
+- Node.js and npm for frontend development
+- Python 3.x for backend services
+
+## Required IAM Roles and Policies
+- Roles for accessing S3, Lambda, and CloudWatch
+
+## Dependencies and Software Versions
+- Node.js 14.x
+- Python 3.8
+
+# Installation & Deployment
+
+## Step-by-Step Setup Instructions
 1. Clone the repository:
    ```bash
    git clone <repository-url>
@@ -12,68 +90,108 @@ This project is a Generative AI application built on the GenAI Foundational Plat
    ```bash
    cd <project-directory>
    ```
-3. Install the required dependencies:
-   ```bash
-   pip install -r sdk/reqs.txt
-   ```
 
-## Usage
-- To get started with the SDK, refer to the `quickstart-sdk.ipynb` notebook in the `sdk/` directory.
-- Ensure you have a `.env` file with the necessary environment variables for authentication and API access.
+## Environment Variables Configuration
+- Set up a `.env` file with AWS credentials and other necessary variables.
 
-## Architecture
-### Logical Architecture
-```mermaid
-graph TD;
-    A[User] -->|Interacts with| B[Admin UI];
-    B -->|Uses| C[SDK];
-    C -->|Communicates with| D[Services];
-    D -->|Processes| E[Data];
-```
+## AWS Resources Provisioning Steps
+- Use AWS CloudFormation or Terraform to provision resources.
 
-### Technical Architecture
-```mermaid
-graph LR;
-    subgraph Frontend
-    A[Admin UI]
-    end
-    subgraph Backend
-    B[SDK] --> C[CognitoTokenManager];
-    C --> D[BaseService];
-    D --> E[ModelService];
-    D --> F[DocumentService];
-    D --> G[VectorService];
-    D --> H[PromptService];
-    end
-    A --> B;
-    B --> I[Platform API];
-```
+## Local Development Setup
+- Run the frontend and backend locally using npm and Python.
 
-## Frontend
-The frontend is built using Nuxt.js and Tailwind CSS, providing a responsive and interactive admin interface.
-- **Components**: Reusable Vue.js components located in `components/`.
-- **Pages**: Application pages structured in `pages/`.
-- **Layouts**: Layout templates in `layouts/`.
-- **Plugins**: Custom plugins in `plugins/`.
-- **Middleware**: Request handling logic in `middleware/`.
+## Production Deployment Guide
+- Deploy using AWS Elastic Beanstalk or AWS Lambda.
 
-## Backend
-The backend is a Python application, providing APIs and server-side logic.
-- **Main Application**: Entry point in `main.py`.
-- **Routes**: Defined in `relay_routes.py` and `metric_routes.py`.
-- **Models**: Data models in `models.py`.
-- **Utilities**: Helper functions in `utils.py`.
-- **Configuration**: Settings in `config.py`.
-- **Dependencies**: Managed in `dependencies.py`.
+# Component Details
 
-## Services Overview
-- **Vectorization**: Handles vector store and index creation, vectorization, and semantic search.
-- **Document Processing**: Manages file registration, extraction, and chunking.
-- **Model Invocation**: Provides methods to list and invoke models with prompts.
-- **Prompt Management**: Manages prompt templates, including creation and retrieval.
+## Admin UI
+- **Purpose**: Provides a web interface for managing AI tasks.
+- **Internal Architecture**: Built with Nuxt.js and Tailwind CSS.
+- **Configuration Options**: Defined in `nuxt.config.ts`.
 
-## Contributing
-Please refer to the `CONTRIBUTING.md` file for guidelines on contributing to this project.
+## SDK
+- **Purpose**: Facilitates API communication.
+- **Internal Architecture**: Python-based with RESTful endpoints.
 
-## License
-This project is licensed under the terms of the LICENSE file. 
+## Services
+- **Purpose**: Core AI processing.
+- **Internal Architecture**: Microservices architecture using AWS Lambda.
+
+# Security Considerations
+
+## Authentication and Authorization
+- Uses AWS Cognito for user management.
+
+## Data Encryption
+- Data encrypted at rest in S3 and in transit.
+
+## Network Security
+- VPC setup for secure networking.
+
+## Best Practices Implemented
+- Regular security audits and updates.
+
+# Performance & Scalability
+
+## Performance Optimization Techniques
+- Caching strategies using AWS ElastiCache.
+
+## Scaling Strategies
+- Auto-scaling groups for Lambda functions.
+
+## Resource Requirements
+- Defined in AWS CloudFormation templates.
+
+## Monitoring and Metrics
+- Utilizes AWS CloudWatch for real-time monitoring.
+
+# Development Guide
+
+## Code Organization
+- Follows MVC pattern for frontend and microservices for backend.
+
+## Coding Standards
+- Adheres to PEP 8 for Python and ESLint for JavaScript.
+
+## Testing Strategy
+- Unit and integration tests using PyTest and Jest.
+
+## CI/CD Pipeline Setup
+- Configured with AWS CodePipeline.
+
+## Contributing Guidelines
+- Refer to `CONTRIBUTING.md` for detailed guidelines.
+
+# Troubleshooting
+
+## Common Issues and Solutions
+- Refer to the `docs/troubleshooting.md` for common issues.
+
+## Logging and Monitoring
+- Logs available in AWS CloudWatch.
+
+## Debug Procedures
+- Use AWS X-Ray for tracing.
+
+# Examples & Usage
+
+## Sample Use Cases
+- NLP tasks, image recognition, etc.
+
+## Code Examples
+- Refer to `examples/` directory for sample code.
+
+## API Usage Examples
+- Detailed in `docs/api.md`.
+
+# License & Attribution
+
+## License Information
+- Licensed under the MIT License.
+
+## Third-Party Dependencies
+- Listed in `package.json` and `requirements.txt`.
+
+## Credits and Acknowledgments
+- Contributions from the open-source community. 
