@@ -23,10 +23,31 @@ This project is a Generative AI application built on the GenAI Foundational Plat
 
 ## Architecture
 ### Logical Architecture
-![Logical Architecture](image/logical_architecture.png)
+```mermaid
+graph TD;
+    A[User] -->|Interacts with| B[Admin UI];
+    B -->|Uses| C[SDK];
+    C -->|Communicates with| D[Services];
+    D -->|Processes| E[Data];
+```
 
 ### Technical Architecture
-![Technical Architecture](image/technical_architecture.png)
+```mermaid
+graph LR;
+    subgraph Frontend
+    A[Admin UI]
+    end
+    subgraph Backend
+    B[SDK] --> C[CognitoTokenManager];
+    C --> D[BaseService];
+    D --> E[ModelService];
+    D --> F[DocumentService];
+    D --> G[VectorService];
+    D --> H[PromptService];
+    end
+    A --> B;
+    B --> I[Platform API];
+```
 
 ## Services Overview
 - **Vectorization**: Handles vector store and index creation, vectorization, and semantic search.
