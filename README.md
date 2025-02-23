@@ -1,65 +1,128 @@
-# Project Title
+# Generative AI Application
 
 ## Overview
-
-This project is a serverless airline booking application built using AWS services. It provides a scalable and efficient way to manage airline bookings.
+This project is a comprehensive generative AI application designed to process documents, manage prompts, and interact with AI models. It leverages AWS services for scalable and secure operations, including microservices, storage, and authentication mechanisms.
 
 ## Architecture
+### Logical Architecture
+This section provides a high-level overview of the system architecture.
 
 ```mermaid
-graph TD;
-    I[Route 53] -->|1| A[API Gateway];
-    A -->|2| H[Cognito];
-    H -->|3| A;
-    A -->|4| B[Lambda Functions];
-    B -->|5| C[DynamoDB];
-    B -->|6| D[S3];
-    D -->|7| E[CloudFront];
-    B -->|8| F[SNS];
-    B -->|9| G[SQS];
-    J[CloudWatch] -->|10| B;
+flowchart TB
+    Client[Client Applications]
+    API[API Gateway]
+    Auth[Auth Service]
+    DB[(Database)]
+    Cache[(Cache)]
+    Queue[(Message Queue)]
+    Worker[Worker Service]
+    
+    Client --> API
+    API --> Auth
+    API --> DB
+    API --> Cache
+    API --> Queue
+    Queue --> Worker
+    Worker --> DB
 ```
 
-The architecture of this application is designed to leverage AWS services for scalability, reliability, and cost-effectiveness. The main components include:
-- **API Gateway**: Serves as the entry point for all client requests, routing them to the appropriate Lambda functions.
-- **Lambda Functions**: Execute business logic and interact with other AWS services.
-- **DynamoDB**: A NoSQL database used for storing booking data.
-- **S3**: Stores static assets and media files.
-- **CloudFront**: Distributes content globally with low latency.
-- **SNS (Simple Notification Service)**: Sends notifications to users or other systems.
-- **SQS (Simple Queue Service)**: Manages message queues for asynchronous processing.
-- **Cognito**: Provides user authentication and authorization.
-- **Route 53**: Manages DNS settings for the application.
-- **CloudWatch**: Monitors application performance and logs.
+### Technical Architecture
+The technical architecture is based on AWS services, including VPC, ECS, and more.
 
-## Setup Instructions
+```mermaid
+flowchart LR
+    subgraph Cloud
+        LB[Load Balancer]
+        subgraph App Cluster
+            API1[API Server 1]
+            API2[API Server 2]
+        end
+        subgraph Data Layer
+            Primary[(Primary DB)]
+            Replica[(Replica DB)]
+            Cache[(Redis Cache)]
+        end
+    end
+    
+    Users[Users] --> LB
+    LB --> API1
+    LB --> API2
+    API1 --> Primary
+    API2 --> Primary
+    Primary --> Replica
+    API1 --> Cache
+    API2 --> Cache
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/aws-serverless-airline-booking.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd aws-serverless-airline-booking
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Deploy the application:
-   ```bash
-   serverless deploy
-   ```
+## Installation
+### Prerequisites
+- Node.js v18+
+- AWS CLI configured
+- Docker
+
+### Steps
+```bash
+# Clone the repository
+git clone <repository-url>
+cd <repository-directory>
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+```
 
 ## Usage
+```javascript
+// Basic usage example
+const client = new ProjectClient();
+const result = await client.doSomething();
+```
 
-- Access the application via the deployed API Gateway endpoint.
-- Use the web interface to make and manage bookings.
+## API Documentation
+Refer to the `api_docs.html` in the `docs/api_docs` directory for API documentation rendered using Swagger UI.
 
-## Contribution Guidelines
+## Development
+- Follow the code style guidelines.
+- Use branch naming conventions.
+- Ensure all tests pass before submitting a pull request.
 
-We welcome contributions! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information.
+## Testing
+```bash
+# Run unit tests
+npm test
+
+# Run integration tests
+npm run test:integration
+
+# Generate test coverage report
+npm run test:coverage
+```
+
+## Deployment
+- Follow the pre-deployment checklist.
+- Use `cdk deploy` for deploying the stack.
+
+## Monitoring
+- Use CloudWatch for monitoring.
+- Set up alerts for critical metrics.
+
+## Troubleshooting
+- Refer to the troubleshooting guide for common issues and solutions.
+
+## Contributing
+- Fork the repository and create a feature branch.
+- Make your changes and run tests.
+- Submit a pull request.
 
 ## License
+This project is licensed under the [LICENSE NAME] - see the [LICENSE.md](LICENSE.md) file for details.
 
-This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file for details. 
+## Acknowledgments
+- Credit to contributors
+- Third-party libraries used
+- Related projects or inspirations
+
+---
+**Note**: Customize this template by removing unnecessary sections or adding specific ones based on your project's needs. Keep documentation clear, concise, and up-to-date. 
