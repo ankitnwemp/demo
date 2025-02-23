@@ -12,14 +12,25 @@ graph TD;
     B --> C[DynamoDB];
     B --> D[S3];
     D --> E[CloudFront];
+    B --> F[SNS];
+    B --> G[SQS];
+    B --> H[Cognito];
+    H --> A;
+    I[Route 53] --> A;
+    J[CloudWatch] --> B;
 ```
 
 The architecture of this application is designed to leverage AWS services for scalability, reliability, and cost-effectiveness. The main components include:
-- **API Gateway**: Serves as the entry point for all client requests.
-- **Lambda Functions**: Handle business logic and interact with other AWS services.
-- **DynamoDB**: Used for storing booking data.
+- **API Gateway**: Serves as the entry point for all client requests, routing them to the appropriate Lambda functions.
+- **Lambda Functions**: Execute business logic and interact with other AWS services.
+- **DynamoDB**: A NoSQL database used for storing booking data.
 - **S3**: Stores static assets and media files.
 - **CloudFront**: Distributes content globally with low latency.
+- **SNS (Simple Notification Service)**: Sends notifications to users or other systems.
+- **SQS (Simple Queue Service)**: Manages message queues for asynchronous processing.
+- **Cognito**: Provides user authentication and authorization.
+- **Route 53**: Manages DNS settings for the application.
+- **CloudWatch**: Monitors application performance and logs.
 
 ## Setup Instructions
 
