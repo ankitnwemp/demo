@@ -6,7 +6,13 @@ This project is a serverless airline booking application built using AWS service
 
 ## Architecture
 
-![Architecture Diagram](media/prototype-architecture.png)
+```mermaid
+graph TD;
+    A[API Gateway] --> B[Lambda Functions];
+    B --> C[DynamoDB];
+    B --> D[S3];
+    D --> E[CloudFront];
+```
 
 The architecture of this application is designed to leverage AWS services for scalability, reliability, and cost-effectiveness. The main components include:
 - **API Gateway**: Serves as the entry point for all client requests.
