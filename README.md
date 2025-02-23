@@ -49,6 +49,23 @@ graph LR;
     B --> I[Platform API];
 ```
 
+## Frontend
+The frontend is built using Nuxt.js and Tailwind CSS, providing a responsive and interactive admin interface.
+- **Components**: Reusable Vue.js components located in `components/`.
+- **Pages**: Application pages structured in `pages/`.
+- **Layouts**: Layout templates in `layouts/`.
+- **Plugins**: Custom plugins in `plugins/`.
+- **Middleware**: Request handling logic in `middleware/`.
+
+## Backend
+The backend is a Python application, providing APIs and server-side logic.
+- **Main Application**: Entry point in `main.py`.
+- **Routes**: Defined in `relay_routes.py` and `metric_routes.py`.
+- **Models**: Data models in `models.py`.
+- **Utilities**: Helper functions in `utils.py`.
+- **Configuration**: Settings in `config.py`.
+- **Dependencies**: Managed in `dependencies.py`.
+
 ## Services Overview
 - **Vectorization**: Handles vector store and index creation, vectorization, and semantic search.
 - **Document Processing**: Manages file registration, extraction, and chunking.
