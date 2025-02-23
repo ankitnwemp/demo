@@ -1,49 +1,36 @@
 # Project Overview
-
-This project is an AWS foundational architecture for generative AI applications. It provides a robust framework for building and deploying AI-driven solutions with key features such as scalability, security, and integration with AWS services.
+This project is an AWS foundational architecture for generative AI applications, designed to provide scalable and efficient solutions for AI-driven tasks.
 
 ## Key Features and Benefits
 - Scalable architecture leveraging AWS services
-- Secure data handling and processing
-- Integration with AWS AI/ML services
-- Flexible and customizable components
+- Efficient data processing and storage
+- Secure and compliant with industry standards
 
 ## Target Audience and Use Cases
-- AI developers and data scientists
+- AI researchers and developers
 - Enterprises looking to integrate AI solutions
-- Use cases include natural language processing, image recognition, and predictive analytics
+- Use cases include natural language processing, image recognition, and more
 
-# Architecture Overview
-
-## Logical & Technical Architecture Diagram
+## Logical Architecture Diagram
 ```mermaid
 graph TD;
-    A[User] -->|Interacts with| B[Admin UI];
-    B -->|Uses| C[SDK];
-    C -->|Communicates with| D[Services];
-    D -->|Processes| E[Data];
+    User -->|Request| Process;
+    Process -->|Response| User;
+    Process -->|Integrates with| API[APIs/Events];
+    API -->|Validates| Rules[Business Rules];
 ```
 
-## Description of Major Components
-- **Admin UI**: User interface for managing AI workflows
-- **SDK**: Software development kit for integrating AI capabilities
-- **Services**: Backend services for data processing and model invocation
-
-## Flow of Data and Interactions
-- User inputs are processed through the Admin UI
-- SDK facilitates communication with backend services
-- Services handle data processing and model execution
-
-## Key AWS Services Utilized
-- Amazon S3 for data storage
-- AWS Lambda for serverless computing
-- Amazon SageMaker for model training and deployment
-
-# Repository Structure
-
-## Tree View
+## Technical Data Flow Diagram
+```mermaid
+graph LR;
+    Ingestion --> Processing;
+    Processing --> Storage;
+    Processing -->|Interacts with| Components[System Components];
 ```
-.
+
+## Repository Structure
+```
+project-root/
 ├── admin-ui/
 │   ├── frontend/
 │   └── backend/
@@ -51,122 +38,59 @@ graph TD;
 ├── services/
 └── docs/
 ```
-
-## Purpose of Each Major Directory
 - **admin-ui/**: Contains the frontend and backend for the admin interface
-- **sdk/**: Provides the SDK for integrating AI capabilities
-- **services/**: Hosts backend services for data processing
+- **sdk/**: Software development kit for interacting with the platform
+- **services/**: Core services for processing and data management
 - **docs/**: Documentation and guides
 
-## Key Configuration Files
-- `nuxt.config.ts`: Configuration for the Nuxt.js frontend
-- `requirements.txt`: Python dependencies for the backend
+## Prerequisites
+- AWS services: S3, Lambda, API Gateway
+- Development environment: Node.js, Python
+- IAM roles and policies for access control
+- Dependencies: Listed in `requirements.txt` and `package.json`
 
-# Prerequisites
+## Installation & Deployment
+1. Clone the repository and navigate to the project directory.
+2. Configure environment variables as per `.env.example`.
+3. Provision AWS resources using CloudFormation.
+4. Set up local development environment.
+5. Deploy to production using CI/CD pipeline.
 
-## Required AWS Services and Permissions
-- Access to Amazon S3, AWS Lambda, and Amazon SageMaker
-- IAM roles with permissions for AI/ML services
+## Component Details
+### Admin UI
+- **Purpose**: Provides a user interface for managing AI tasks
+- **Internal Architecture**: Built with Nuxt.js and Tailwind CSS
+- **Configuration**: Defined in `nuxt.config.ts`
+- **API Endpoints**: `/api/tasks`, `/api/models`
 
-## Development Environment Setup
-- Node.js and npm for frontend development
-- Python 3.x for backend services
+### SDK
+- **Purpose**: Facilitates interaction with the platform
+- **Internal Architecture**: Python-based with RESTful API calls
+- **Configuration**: Managed via `config.py`
 
-## Required IAM Roles and Policies
-- Roles for accessing AWS AI/ML services
-- Policies for data storage and processing
+## Security Considerations
+- **Authentication**: Managed via AWS Cognito
+- **Data Encryption**: S3 bucket encryption enabled
+- **Network Security**: VPC and security groups configured
 
-## Dependencies and Software Versions
-- Node.js 14.x
-- Python 3.8
+## Performance & Scalability
+- **Optimization**: Caching and load balancing
+- **Scaling**: Auto-scaling groups for EC2 instances
 
-# Installation & Deployment
+## Development Guide
+- **Code Organization**: Follows MVC pattern
+- **Testing**: Unit and integration tests
+- **CI/CD**: Configured with GitHub Actions
 
-## Step-by-Step Setup Instructions
-1. Clone the repository
-2. Install dependencies
-3. Configure environment variables
+## Troubleshooting
+- **Common Issues**: Refer to `docs/troubleshooting.md`
+- **Logging**: Enabled via CloudWatch
 
-## Environment Variables Configuration
-- Set AWS credentials and region
+## Examples & Usage
+- **Sample Use Cases**: Provided in `examples/`
+- **Code Examples**: Available in `sdk/quickstart-sdk.ipynb`
 
-## AWS Resources Provisioning Steps
-- Deploy infrastructure using AWS CloudFormation
-
-## Local Development Setup
-- Run frontend and backend locally
-
-## Production Deployment Guide
-- Deploy to AWS using CI/CD pipeline
-
-# Component Details
-
-## Admin UI
-- **Purpose**: Manage AI workflows
-- **Internal Architecture**: Built with Nuxt.js
-- **Configuration Options**: Tailwind CSS for styling
-
-## SDK
-- **Purpose**: Integrate AI capabilities
-- **API Endpoints**: Provides access to AI models
-
-## Services
-- **Purpose**: Data processing and model invocation
-- **Integration Points**: Connects with AWS services
-
-# Security Considerations
-
-## Authentication and Authorization
-- Uses AWS Cognito for user management
-
-## Data Encryption
-- Encrypts data at rest and in transit
-
-## Network Security
-- VPC setup for secure networking
-
-# Performance & Scalability
-
-## Performance Optimization Techniques
-- Caching strategies for faster response
-
-## Scaling Strategies
-- Auto-scaling with AWS Lambda
-
-# Development Guide
-
-## Code Organization
-- Modular structure for maintainability
-
-## Coding Standards
-- Follows PEP 8 for Python code
-
-## Testing Strategy
-- Unit and integration tests
-
-# Troubleshooting
-
-## Common Issues and Solutions
-- AWS service limits and quotas
-
-## Logging and Monitoring
-- CloudWatch for monitoring
-
-# Examples & Usage
-
-## Sample Use Cases
-- Text classification with AI models
-
-## Code Examples
-- Example scripts in `examples/`
-
-# License & Attribution
-
-## License Information
-- Licensed under the MIT License
-
-## Third-Party Dependencies
-- Lists all dependencies in `requirements.txt`
-
-## Credits and Acknowledgments
-- Contributions from the open-source community 
+## License & Attribution
+- **License**: See `LICENSE` file
+- **Third-party Dependencies**: Listed in `NOTICE.txt`
+- **Credits**: Acknowledgments in `docs/credits.md` 
