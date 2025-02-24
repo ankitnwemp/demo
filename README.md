@@ -1,96 +1,102 @@
-# Project Overview
-This project is an AWS foundational architecture for generative AI applications, designed to provide scalable and efficient solutions for AI-driven tasks.
+# API Documentation
 
-## Key Features and Benefits
-- Scalable architecture leveraging AWS services
-- Efficient data processing and storage
-- Secure and compliant with industry standards
+## /admin/metrics/invocations
+- **Method**: POST
+- **Description**: Retrieves invocation metrics for a specified model and application.
+- **Authentication**: Requires valid Cognito token.
 
-## Target Audience and Use Cases
-- AI researchers and developers
-- Enterprises looking to integrate AI solutions
-- Use cases include natural language processing, image recognition, and more
+### Request Parameters
+- **Body**:
+  - `model_id` (Optional, string): ID of the model.
+  - `app_id` (Required, string): ID of the application.
+  - `start_date` (Optional, string): Start date in yyyy-dd-mm format.
+  - `end_date` (Optional, string): End date in yyyy-dd-mm format.
 
-## Logical Architecture Diagram
-```mermaid
-graph TD;
-    User -->|Request| Process;
-    Process -->|Response| User;
-    Process -->|Integrates with| API[APIs/Events];
-    API -->|Validates| Rules[Business Rules];
-```
+### Response Format
+- **Success**: 200 OK
+  ```json
+  {
+    "invocations": [
+      {
+        "timestamp": "2023-10-01T12:00:00Z",
+        "count": 10
+      }
+    ]
+  }
+  ```
+- **Fields**:
+  - `timestamp`: ISO 8601 formatted date and time.
+  - `count`: Number of invocations.
 
-## Technical Data Flow Diagram
-```mermaid
-graph LR;
-    Ingestion --> Processing;
-    Processing --> Storage;
-    Processing -->|Interacts with| Components[System Components];
-```
+### Error Responses
+- **400 Bad Request**: Invalid date format.
+- **401 Unauthorized**: Missing or invalid token.
 
-## Repository Structure
-```
-project-root/
-├── admin-ui/
-│   ├── frontend/
-│   └── backend/
-├── sdk/
-├── services/
-└── docs/
-```
-- **admin-ui/**: Contains the frontend and backend for the admin interface
-- **sdk/**: Software development kit for interacting with the platform
-- **services/**: Core services for processing and data management
-- **docs/**: Documentation and guides
+## /admin/metrics/extraction-jobs
+- **Method**: POST
+- **Description**: Retrieves metrics for document extraction jobs.
+- **Authentication**: Requires valid Cognito token.
 
-## Prerequisites
-- AWS services: S3, Lambda, API Gateway
-- Development environment: Node.js, Python
-- IAM roles and policies for access control
-- Dependencies: Listed in `requirements.txt` and `package.json`
+### Request Parameters
+- **Body**:
+  - `app_id` (Required, string): ID of the application.
+  - `start_date` (Optional, string): Start date in yyyy-dd-mm format.
+  - `end_date` (Optional, string): End date in yyyy-dd-mm format.
 
-## Installation & Deployment
-1. Clone the repository and navigate to the project directory.
-2. Configure environment variables as per `.env.example`.
-3. Provision AWS resources using CloudFormation.
-4. Set up local development environment.
-5. Deploy to production using CI/CD pipeline.
+### Response Format
+- **Success**: 200 OK
+  ```json
+  {
+    "jobs": [
+      {
+        "job_id": "12345",
+        "status": "completed"
+      }
+    ]
+  }
+  ```
+- **Fields**:
+  - `job_id`: Unique identifier for the job.
+  - `status`: Current status of the job.
 
-## Component Details
-### Admin UI
-- **Purpose**: Provides a user interface for managing AI tasks
-- **Internal Architecture**: Built with Nuxt.js and Tailwind CSS
-- **Configuration**: Defined in `nuxt.config.ts`
-- **API Endpoints**: `/api/tasks`, `/api/models`
+### Error Responses
+- **400 Bad Request**: Invalid date format.
+- **401 Unauthorized**: Missing or invalid token.
 
-### SDK
-- **Purpose**: Facilitates interaction with the platform
-- **Internal Architecture**: Python-based with RESTful API calls
-- **Configuration**: Managed via `config.py`
+## /admin/metrics/vector-stores
+- **Method**: POST
+- **Description**: Retrieves metrics for vector stores.
+- **Authentication**: Requires valid Cognito token.
 
-## Security Considerations
-- **Authentication**: Managed via AWS Cognito
-- **Data Encryption**: S3 bucket encryption enabled
-- **Network Security**: VPC and security groups configured
+### Request Parameters
+- **Body**:
+  - `app_id` (Required, string): ID of the application.
+  - `start_date` (Optional, string): Start date in yyyy-dd-mm format.
+  - `end_date` (Optional, string): End date in yyyy-dd-mm format.
 
-## Performance & Scalability
-- **Optimization**: Caching and load balancing
-- **Scaling**: Auto-scaling groups for EC2 instances
+### Response Format
+- **Success**: 200 OK
+  ```json
+  {
+    "vector_stores": [
+      {
+        "store_id": "67890",
+        "size": 1000
+      }
+    ]
+  }
+  ```
+- **Fields**:
+  - `store_id`: Unique identifier for the vector store.
+  - `size`: Number of vectors stored.
 
-## Development Guide
-- **Code Organization**: Follows MVC pattern
-- **Testing**: Unit and integration tests
-- **CI/CD**: Configured with GitHub Actions
+### Error Responses
+- **400 Bad Request**: Invalid date format.
+- **401 Unauthorized**: Missing or invalid token.
 
-## Troubleshooting
-- **Common Issues**: Refer to `docs/troubleshooting.md`
-- **Logging**: Enabled via CloudWatch
+## Rate Limits and Usage Constraints
+- No specific rate limits are defined, but standard AWS API Gateway limits apply.
 
-## Examples & Usage
-- **Sample Use Cases**: Provided in `examples/`
-- **Code Examples**: Available in `sdk/quickstart-sdk.ipynb`
-
-## License & Attribution
-- **License**: See `LICENSE` file
-- **Third-party Dependencies**: Listed in `NOTICE.txt`
-- **Credits**: Acknowledgments in `docs/credits.md` 
+## Dependencies and Prerequisites
+- Requires AWS Cognito for authentication.
+- DynamoDB is used for storing metrics data. 
