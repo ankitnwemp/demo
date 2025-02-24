@@ -1,102 +1,153 @@
 # API Documentation
 
-## /admin/metrics/invocations
-- **Method**: POST
-- **Description**: Retrieves invocation metrics for a specified model and application.
-- **Authentication**: Requires valid Cognito token.
+## Table of Contents
+- [Endpoint 1](#endpoint-1)
+- [Endpoint 2](#endpoint-2)
+- ...
 
-### Request Parameters
-- **Body**:
-  - `model_id` (Optional, string): ID of the model.
-  - `app_id` (Required, string): ID of the application.
-  - `start_date` (Optional, string): Start date in yyyy-dd-mm format.
-  - `end_date` (Optional, string): End date in yyyy-dd-mm format.
+---
 
-### Response Format
-- **Success**: 200 OK
+## Endpoint 1
+
+### 1. Endpoint Path and HTTP Method
+- **Path:** `/api/v1/example`
+- **Method:** `GET`
+
+### 2. Description
+- Retrieves a list of examples from the database.
+
+### 3. Authentication/Authorization
+- Requires Bearer Token authentication.
+
+### 4. Request Parameters
+
+#### Path Parameters
+- None
+
+#### Query Parameters
+- `filter` (optional): A string to filter results.
+- `limit` (optional): An integer to limit the number of results. Default is 10.
+
+#### Request Body Parameters
+- None
+
+### 5. Response Format
+
+#### Success Responses
+- **Status Code:** `200 OK`
+- **Sample JSON Response:**
   ```json
   {
-    "invocations": [
+    "data": [
       {
-        "timestamp": "2023-10-01T12:00:00Z",
-        "count": 10
+        "id": 1,
+        "name": "Example Name",
+        "description": "Example Description"
       }
-    ]
+    ],
+    "total": 1
   }
   ```
-- **Fields**:
-  - `timestamp`: ISO 8601 formatted date and time.
-  - `count`: Number of invocations.
 
-### Error Responses
-- **400 Bad Request**: Invalid date format.
-- **401 Unauthorized**: Missing or invalid token.
+#### Field Descriptions
+- `data`: An array of example objects.
+  - `id`: Integer, unique identifier for the example.
+  - `name`: String, name of the example.
+  - `description`: String, description of the example.
+- `total`: Integer, total number of examples returned.
 
-## /admin/metrics/extraction-jobs
-- **Method**: POST
-- **Description**: Retrieves metrics for document extraction jobs.
-- **Authentication**: Requires valid Cognito token.
+### 6. Error Responses
 
-### Request Parameters
-- **Body**:
-  - `app_id` (Required, string): ID of the application.
-  - `start_date` (Optional, string): Start date in yyyy-dd-mm format.
-  - `end_date` (Optional, string): End date in yyyy-dd-mm format.
+#### Possible Error Status Codes
+- `401 Unauthorized`: Authentication token is missing or invalid.
+- `400 Bad Request`: Invalid query parameters.
 
-### Response Format
-- **Success**: 200 OK
+#### Error Message Format
+- **Sample Error Response:**
   ```json
   {
-    "jobs": [
-      {
-        "job_id": "12345",
-        "status": "completed"
-      }
-    ]
+    "error": "Invalid query parameter"
   }
   ```
-- **Fields**:
-  - `job_id`: Unique identifier for the job.
-  - `status`: Current status of the job.
 
-### Error Responses
-- **400 Bad Request**: Invalid date format.
-- **401 Unauthorized**: Missing or invalid token.
+#### Common Error Scenarios
+- Missing authentication token.
+- Invalid filter query parameter.
 
-## /admin/metrics/vector-stores
-- **Method**: POST
-- **Description**: Retrieves metrics for vector stores.
-- **Authentication**: Requires valid Cognito token.
+### 7. Rate Limits or Usage Constraints
+- Maximum of 100 requests per minute.
 
-### Request Parameters
-- **Body**:
-  - `app_id` (Required, string): ID of the application.
-  - `start_date` (Optional, string): Start date in yyyy-dd-mm format.
-  - `end_date` (Optional, string): End date in yyyy-dd-mm format.
+### 8. Dependencies or Prerequisites
+- Requires a valid API key for authentication.
 
-### Response Format
-- **Success**: 200 OK
+---
+
+## Endpoint 2
+
+### 1. Endpoint Path and HTTP Method
+- **Path:** `/api/v1/example/{id}`
+- **Method:** `PUT`
+
+### 2. Description
+- Updates an existing example in the database.
+
+### 3. Authentication/Authorization
+- Requires Bearer Token authentication.
+
+### 4. Request Parameters
+
+#### Path Parameters
+- `id` (required): Integer, unique identifier of the example to update.
+
+#### Query Parameters
+- None
+
+#### Request Body Parameters
+- `name` (optional): String, new name for the example.
+- `description` (optional): String, new description for the example.
+
+### 5. Response Format
+
+#### Success Responses
+- **Status Code:** `200 OK`
+- **Sample JSON Response:**
   ```json
   {
-    "vector_stores": [
-      {
-        "store_id": "67890",
-        "size": 1000
-      }
-    ]
+    "message": "Example updated successfully",
+    "example": {
+      "id": 1,
+      "name": "Updated Name",
+      "description": "Updated Description"
+    }
   }
   ```
-- **Fields**:
-  - `store_id`: Unique identifier for the vector store.
-  - `size`: Number of vectors stored.
 
-### Error Responses
-- **400 Bad Request**: Invalid date format.
-- **401 Unauthorized**: Missing or invalid token.
+#### Field Descriptions
+- `message`: String, confirmation message.
+- `example`: Object, updated example details.
 
-## Rate Limits and Usage Constraints
-- No specific rate limits are defined, but standard AWS API Gateway limits apply.
+### 6. Error Responses
 
-## Dependencies and Prerequisites
-- Requires AWS Cognito for authentication.
-- DynamoDB is used for storing metrics data. 
+#### Possible Error Status Codes
+- `401 Unauthorized`: Authentication token is missing or invalid.
+- `404 Not Found`: Example with the specified ID does not exist.
+
+#### Error Message Format
+- **Sample Error Response:**
+  ```json
+  {
+    "error": "Example not found"
+  }
+  ```
+
+#### Common Error Scenarios
+- Missing authentication token.
+- Non-existent example ID.
+
+### 7. Rate Limits or Usage Constraints
+- Maximum of 50 requests per minute.
+
+### 8. Dependencies or Prerequisites
+- Requires a valid API key for authentication.
+
+---
