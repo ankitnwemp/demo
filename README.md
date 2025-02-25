@@ -259,3 +259,117 @@ This is a starting point for the documentation. Further details can be added for
 - **Tables and Code Blocks**: Used for clarity.
 
 This documentation provides a comprehensive overview of the API, covering all aspects of each service and endpoint. Further details can be added as needed. 
+
+## Cart Service API Documentation
+
+### Overview
+The Cart Service manages user cart operations, allowing users to add items, view their cart, and empty their cart.
+
+### API Endpoints
+
+1. **Add Item to Cart**
+   - **Method**: gRPC
+   - **Service Method**: `AddItem`
+   - **Description**: Adds an item to the user's cart.
+   - **Request**:
+     - **Type**: `AddItemRequest`
+     - **Fields**:
+       - `UserId` (string): The ID of the user.
+       - `Item` (object): The item to add.
+         - `ProductId` (string): The ID of the product.
+         - `Quantity` (int): The quantity of the product.
+   - **Response**:
+     - **Type**: `Empty`
+     - **Description**: Indicates successful addition of the item.
+   - **Example Request**:
+     ```json
+     {
+       "UserId": "user123",
+       "Item": {
+         "ProductId": "product456",
+         "Quantity": 2
+       }
+     }
+     ```
+
+2. **Get Cart**
+   - **Method**: gRPC
+   - **Service Method**: `GetCart`
+   - **Description**: Retrieves the user's cart.
+   - **Request**:
+     - **Type**: `GetCartRequest`
+     - **Fields**:
+       - `UserId` (string): The ID of the user.
+   - **Response**:
+     - **Type**: `Cart`
+     - **Fields**:
+       - `UserId` (string): The ID of the user.
+       - `Items` (array): List of items in the cart.
+         - `ProductId` (string): The ID of the product.
+         - `Quantity` (int): The quantity of the product.
+   - **Example Request**:
+     ```json
+     {
+       "UserId": "user123"
+     }
+     ```
+   - **Example Response**:
+     ```json
+     {
+       "UserId": "user123",
+       "Items": [
+         {
+           "ProductId": "product456",
+           "Quantity": 2
+         }
+       ]
+     }
+     ```
+
+3. **Empty Cart**
+   - **Method**: gRPC
+   - **Service Method**: `EmptyCart`
+   - **Description**: Empties the user's cart.
+   - **Request**:
+     - **Type**: `EmptyCartRequest`
+     - **Fields**:
+       - `UserId` (string): The ID of the user.
+   - **Response**:
+     - **Type**: `Empty`
+     - **Description**: Indicates successful emptying of the cart.
+   - **Example Request**:
+     ```json
+     {
+       "UserId": "user123"
+     }
+     ```
+
+### Authentication and Authorization
+- **Authentication**: Typically handled at the gRPC level, often using tokens or certificates.
+- **Authorization**: Ensures that the user has permission to modify their own cart.
+
+### Data Models
+
+- **AddItemRequest**
+  - **Fields**:
+    - `UserId`: string
+    - `Item`: object
+      - `ProductId`: string
+      - `Quantity`: int
+
+- **GetCartRequest**
+  - **Fields**:
+    - `UserId`: string
+
+- **EmptyCartRequest**
+  - **Fields**:
+    - `UserId`: string
+
+- **Cart**
+  - **Fields**:
+    - `UserId`: string
+    - `Items`: array of objects
+      - `ProductId`: string
+      - `Quantity`: int
+
+This documentation provides a detailed overview of the Cart Service's API. Further details can be added for other services as needed. 
