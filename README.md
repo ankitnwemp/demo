@@ -52,6 +52,23 @@ graph TD;
     ElastiCache -->|Cache| Model_Invocation_Service;
 ```
 
+### User Request Flow
+
+The following is a comprehensive step-by-step flow of a user request from start to end, including authentication:
+
+1. **User Initiation**: The user initiates a request through the Admin UI or SDK.
+2. **Authentication**: The request is authenticated using AWS Cognito, which verifies the user's credentials and provides an access token.
+3. **API Gateway**: The authenticated request is sent to the Amazon API Gateway, which serves as the entry point for all API requests.
+4. **Request Routing**: The API Gateway routes the request to the appropriate microservice based on the request path and method.
+5. **Authorization**: The microservice checks the user's permissions using IAM policies to ensure they have the necessary access rights.
+6. **Processing**: The microservice processes the request, which may involve computations, data retrieval, or interactions with other services.
+7. **Data Interaction**: The microservice interacts with AWS services such as DynamoDB for data storage, S3 for file handling, or OpenSearch for search operations.
+8. **Response Generation**: After processing, the microservice generates a response, which includes the results of the requested operation.
+9. **Response Return**: The response is sent back through the API Gateway to the user.
+10. **User Notification**: The user receives the response, completing the request cycle.
+
+This flow ensures that user requests are handled securely, efficiently, and in a scalable manner, leveraging AWS services for optimal performance and security.
+
 ### Technology Stack
 - **AWS S3**: For scalable storage solutions.
 - **AWS Lambda**: To handle serverless compute tasks efficiently.
