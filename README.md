@@ -199,25 +199,6 @@ This project is licensed under the terms of the LICENSE file.
 
 This project is an AWS foundational architecture for generative AI applications, designed to provide scalable and efficient solutions for AI-driven tasks. It leverages AWS services to ensure scalability, efficiency, and security, making it suitable for AI researchers, developers, and enterprises looking to integrate AI solutions.
 
-## Architecture
-
-### Logical Architecture
-```mermaid
-graph TD;
-    User -->|Request| Process;
-    Process -->|Response| User;
-    Process -->|Integrates with| API[APIs/Events];
-    API -->|Validates| Rules[Business Rules];
-```
-
-### Technical Architecture
-```mermaid
-graph LR;
-    Ingestion --> Processing;
-    Processing --> Storage;
-    Processing -->|Interacts with| Components[System Components];
-```
-
 ## Features
 
 - Scalable architecture leveraging AWS services
