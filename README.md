@@ -128,16 +128,6 @@ sdk = GenAISDK(api_key='your_api_key')
 result = sdk.perform_task('task_name')
 ```
 
-### API References
-- **Endpoint 1**: Request/response formats.
-- **Endpoint 2**: Request/response formats.
-
-## Cost Optimization
-
-### Strategies
-- Use of reserved instances for cost savings.
-- Efficient use of AWS services to minimize costs.
-
 ## Security Considerations
 - Use of AWS Cognito for authentication.
 - Encryption of data at rest and in transit.
