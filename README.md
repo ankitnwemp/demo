@@ -67,9 +67,6 @@ graph TD;
 - **SDK**: Facilitates interaction with the platform.
 - **Core Services**: Handle processing and data management.
 
-### Data Flows
-Data flows from user inputs through the API Gateway to the processing services, which interact with storage solutions like S3 and databases like DynamoDB.
-
 ### Integration Points
 Integration with external systems is managed through secure API endpoints, ensuring seamless data exchange and processing.
 
@@ -82,10 +79,6 @@ The architecture supports auto-scaling and includes redundancy features to ensur
 - **Scalable Architecture**: Leverages AWS services for scalability.
 - **Efficient Data Processing**: Optimized for AI-driven tasks.
 - **Secure Operations**: Compliant with industry standards.
-
-### Detailed Feature Descriptions
-- **Feature 1**: Description, business value, technical implementation, and limitations.
-- **Feature 2**: Description, business value, technical implementation, and limitations.
 
 ## Deployment Framework
 
@@ -110,8 +103,6 @@ Integrated with GitHub Actions for automated deployment and testing.
 - Node.js v14.x
 - Python 3.8
 
-### Network and Security Configurations
-- VPC setup with security groups.
 
 ## Implementation Guide
 
