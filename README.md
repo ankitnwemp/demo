@@ -1,46 +1,61 @@
-## Overview
+# Generative AI Applications Foundational Architecture
+
+## Introduction
 
 This project provides a scalable and efficient AWS foundational architecture for generative AI applications, enabling AI-driven tasks such as natural language processing and image recognition. It is designed to support AI researchers, developers, and enterprises in integrating AI solutions seamlessly.
+
+### Latest Updates
+- **Version 1.0.1**: Improved deployment scripts and added new API endpoints.
+- **Version 1.0.0**: Initial release with core features and architecture.
 
 ## Solution Overview
 
 This solution addresses the need for a robust and scalable architecture to support generative AI applications. It leverages AWS services to provide a secure, efficient, and scalable environment for AI-driven tasks. The architectural approach focuses on modularity, scalability, and security, ensuring that each component can be independently scaled and managed.
 
 ### AWS Services Used
-- **Amazon S3**: Scalable storage solutions.
-- **AWS Lambda**: Serverless compute tasks.
-- **Amazon API Gateway**: Secure and scalable API interactions.
-- **Amazon DynamoDB**: Storing application data.
-- **Amazon ECS**: Hosts microservices using Fargate.
-- **Amazon ElastiCache**: Redis caching for performance.
-- **Amazon OpenSearch Service**: Vector search and document indexing.
-- **AWS CloudFront**: Secure content distribution.
-- **AWS WAF**: Protects from web exploits.
-- **AWS KMS**: Manages encryption keys.
-- **AWS IAM**: Secure access control.
+- **Amazon S3**: Used for scalable storage solutions, including storing access logs and results of extraction processes. Enforced TLS for secure data transfer.
+- **AWS Lambda**: Utilized for serverless compute tasks, providing efficient processing capabilities.
+- **Amazon API Gateway**: Manages secure and scalable API interactions, integrating with AWS Cognito for authentication.
+- **Amazon DynamoDB**: Used for storing application data, including job logs and vector store information.
+- **Amazon ECS (Elastic Container Service)**: Hosts microservices using Fargate for serverless container management.
+- **Amazon ElastiCache**: Provides Redis caching for asynchronous model invocation, enhancing performance.
+- **Amazon OpenSearch Service**: Facilitates vector search and document indexing, with security policies for data protection.
+- **AWS CloudFront**: Distributes content securely with WAF integration for enhanced security.
+- **AWS WAF (Web Application Firewall)**: Protects the application from common web exploits, integrated with CloudFront.
+- **AWS KMS (Key Management Service)**: Manages encryption keys for securing data at rest and in transit.
+- **AWS IAM (Identity and Access Management)**: Manages roles and policies for secure access control across services.
 
 ### Security Features
-- **AWS Cognito**: User authentication and authorization.
-- **VPC and Security Groups**: Network security.
-- **CloudWatch Logs**: Monitoring and logging.
-- **IAM Policies**: Permissions for accessing AWS resources.
-- **TLS Enforcement**: Secure data transfer.
+- **AWS Cognito**: Provides user authentication and authorization, ensuring secure access to APIs.
+- **VPC and Security Groups**: Configured to control inbound and outbound traffic, ensuring network security.
+- **CloudWatch Logs**: Used for monitoring and logging, with encryption enabled for data protection.
+- **IAM Policies**: Define permissions for accessing AWS resources, ensuring least privilege access.
+- **TLS Enforcement**: Ensures secure data transfer by enforcing TLS 1.2 for all S3 buckets and endpoints.
+
+### Architectural Diagram
+The architecture includes components such as the Admin UI, SDK, and core services, all interacting through a secure API Gateway. The diagram would show the flow of data from user requests to processing and storage, highlighting integration with AWS services like S3, Lambda, and DynamoDB.
+
+### Technology Stack
+- **AWS S3**: For scalable storage solutions.
+- **AWS Lambda**: To handle serverless compute tasks efficiently.
+- **AWS API Gateway**: For secure and scalable API management.
+- **Node.js & Python**: For development flexibility and performance.
 
 ## Architecture Details
 
 ### Components
-- **Admin UI**: User interface for managing AI tasks.
-- **SDK**: Interaction with the platform.
-- **Core Services**: Processing and data management.
+- **Admin UI**: Provides a user interface for managing AI tasks.
+- **SDK**: Facilitates interaction with the platform.
+- **Core Services**: Handle processing and data management.
 
 ### Data Flows
 Data flows from user inputs through the API Gateway to the processing services, which interact with storage solutions like S3 and databases like DynamoDB.
 
 ### Integration Points
-Secure API endpoints for seamless data exchange and processing.
+Integration with external systems is managed through secure API endpoints, ensuring seamless data exchange and processing.
 
 ### Scalability and Redundancy
-Auto-scaling and redundancy features for high availability and fault tolerance.
+The architecture supports auto-scaling and includes redundancy features to ensure high availability and fault tolerance.
 
 ## Features and Capabilities
 
@@ -48,6 +63,10 @@ Auto-scaling and redundancy features for high availability and fault tolerance.
 - **Scalable Architecture**: Leverages AWS services for scalability.
 - **Efficient Data Processing**: Optimized for AI-driven tasks.
 - **Secure Operations**: Compliant with industry standards.
+
+### Detailed Feature Descriptions
+- **Feature 1**: Description, business value, technical implementation, and limitations.
+- **Feature 2**: Description, business value, technical implementation, and limitations.
 
 ## Deployment Framework
 
@@ -156,6 +175,91 @@ This project is licensed under the terms of the LICENSE file.
 
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
+
+## Overview
+
+This project is an AWS foundational architecture for generative AI applications, designed to provide scalable and efficient solutions for AI-driven tasks. It leverages AWS services to ensure scalability, efficiency, and security, making it suitable for AI researchers, developers, and enterprises looking to integrate AI solutions.
+
+## Architecture
+
+### Logical Architecture
+```mermaid
+graph TD;
+    User -->|Request| Process;
+    Process -->|Response| User;
+    Process -->|Integrates with| API[APIs/Events];
+    API -->|Validates| Rules[Business Rules];
+```
+
+### Technical Architecture
+```mermaid
+graph LR;
+    Ingestion --> Processing;
+    Processing --> Storage;
+    Processing -->|Interacts with| Components[System Components];
+```
+
+## Features
+
+- Scalable architecture leveraging AWS services
+- Efficient data processing and storage
+- Secure and compliant with industry standards
+- Supports AI tasks like NLP and image recognition
+
+## Prerequisites
+
+- AWS services: S3, Lambda, API Gateway
+- Development environment: Node.js, Python
+- IAM roles and policies for access control
+- Dependencies: Listed in `requirements.txt` and `package.json`
+
+## Setup & Deployment
+
+1. Clone the repository and navigate to the project directory.
+2. Configure environment variables as per `.env.example`.
+3. Provision AWS resources using CloudFormation.
+4. Set up local development environment.
+5. Deploy to production using CI/CD pipeline.
+
+## Usage
+
+### Basic Usage
+
+```python
+# Import the SDK
+from sdk import GenAISDK
+
+# Initialize the SDK
+sdk = GenAISDK(api_key='your_api_key')
+
+# Use the SDK to perform a task
+result = sdk.perform_task('task_name')
+print(result)
+```
+
+### Advanced Usage
+
+```python
+# Advanced usage with custom configurations
+config = {
+    'option1': 'value1',
+    'option2': 'value2'
+}
+
+result = sdk.perform_advanced_task('task_name', config=config)
+print(result)
+```
+
+## Configuration
+
+- Environment variables are configured in the `.env` file.
+- Configuration options are detailed in `config.py`.
+
+## Security
+
+- **Authentication**: Managed via AWS Cognito
+- **Data Encryption**: S3 bucket encryption enabled
+- **Network Security**: VPC and security groups configured
 
 ## Contributing
 
