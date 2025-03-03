@@ -139,26 +139,12 @@ result = sdk.perform_task('task_name')
 - Efficient use of AWS services to minimize costs.
 
 ## Security Considerations
-
-### Best Practices
 - Use of AWS Cognito for authentication.
 - Encryption of data at rest and in transit.
-
-## Operations and Monitoring
 
 ### Logging and Metrics
 - CloudWatch for logging and monitoring.
 
-### Troubleshooting
-- Common issues and solutions.
-
-## Performance Tuning
-
-### Benchmarks
-- Performance metrics for key operations.
-
-### Optimization Strategies
-- Caching and load balancing techniques.
 
 ## Project Structure
 
@@ -176,24 +162,6 @@ project-root/
 - **services/**: Core services for processing and data management.
 - **docs/**: Documentation and guides.
 
-## Development Guide
-
-### Workflow
-- Branching strategy and code review process.
-
-### Testing
-- Unit and integration testing frameworks.
-
-## License and Notices
-
-### License
-This project is licensed under the terms of the LICENSE file.
-
-### Third-party Attributions
-- List of third-party libraries and their licenses.
-
-### Compliance Notices
-- Compliance with industry standards and regulations.
 
 ## Contributing
 
