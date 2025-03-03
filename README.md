@@ -12,6 +12,26 @@ This project provides a scalable and efficient AWS foundational architecture for
 
 This solution addresses the need for a robust and scalable architecture to support generative AI applications. It leverages AWS services to provide a secure, efficient, and scalable environment for AI-driven tasks. The architectural approach focuses on modularity, scalability, and security, ensuring that each component can be independently scaled and managed.
 
+### AWS Services Used
+- **Amazon S3**: Used for scalable storage solutions, including storing access logs and results of extraction processes. Enforced TLS for secure data transfer.
+- **AWS Lambda**: Utilized for serverless compute tasks, providing efficient processing capabilities.
+- **Amazon API Gateway**: Manages secure and scalable API interactions, integrating with AWS Cognito for authentication.
+- **Amazon DynamoDB**: Used for storing application data, including job logs and vector store information.
+- **Amazon ECS (Elastic Container Service)**: Hosts microservices using Fargate for serverless container management.
+- **Amazon ElastiCache**: Provides Redis caching for asynchronous model invocation, enhancing performance.
+- **Amazon OpenSearch Service**: Facilitates vector search and document indexing, with security policies for data protection.
+- **AWS CloudFront**: Distributes content securely with WAF integration for enhanced security.
+- **AWS WAF (Web Application Firewall)**: Protects the application from common web exploits, integrated with CloudFront.
+- **AWS KMS (Key Management Service)**: Manages encryption keys for securing data at rest and in transit.
+- **AWS IAM (Identity and Access Management)**: Manages roles and policies for secure access control across services.
+
+### Security Features
+- **AWS Cognito**: Provides user authentication and authorization, ensuring secure access to APIs.
+- **VPC and Security Groups**: Configured to control inbound and outbound traffic, ensuring network security.
+- **CloudWatch Logs**: Used for monitoring and logging, with encryption enabled for data protection.
+- **IAM Policies**: Define permissions for accessing AWS resources, ensuring least privilege access.
+- **TLS Enforcement**: Ensures secure data transfer by enforcing TLS 1.2 for all S3 buckets and endpoints.
+
 ### Architectural Diagram
 The architecture includes components such as the Admin UI, SDK, and core services, all interacting through a secure API Gateway. The diagram would show the flow of data from user requests to processing and storage, highlighting integration with AWS services like S3, Lambda, and DynamoDB.
 
