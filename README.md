@@ -101,7 +101,6 @@ Integrated with GitHub Actions for automated deployment and testing.
 - Node.js v14.x
 - Python 3.8
 
-
 ## Implementation Guide
 
 ### Code Examples
@@ -179,7 +178,6 @@ This project is licensed under the terms of the LICENSE file.
 ### Compliance Notices
 - Compliance with industry standards and regulations.
 
-
 ## Contributing
 
 Please refer to the `CONTRIBUTING.md` file for guidelines on contributing to this project.
@@ -187,4 +185,4 @@ Please refer to the `CONTRIBUTING.md` file for guidelines on contributing to thi
 ## References
 
 - [AWS Documentation](https://aws.amazon.com/documentation/)
-- [Nuxt.js Documentation](https://nuxt.com/docs/getting-started/introduction)
+- [Nuxt.js Documentation](https://nuxt.com/docs/getting-started/introduction) 
