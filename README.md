@@ -49,8 +49,6 @@ graph TD;
     Admin_Backend_Service -->|REST| API_Gateway;
     CloudFront -->|CDN| Admin_UI;
     WAF -->|Security| CloudFront;
-    IAM -->|Security| All_Services;
-    KMS -->|Encryption| All_Services;
     ElastiCache -->|Cache| Model_Invocation_Service;
 ```
 
