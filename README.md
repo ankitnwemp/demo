@@ -33,7 +33,26 @@ This solution addresses the need for a robust and scalable architecture to suppo
 - **TLS Enforcement**: Ensures secure data transfer by enforcing TLS 1.2 for all S3 buckets and endpoints.
 
 ### Architectural Diagram
-The architecture includes components such as the Admin UI, SDK, and core services, all interacting through a secure API Gateway. The diagram would show the flow of data from user requests to processing and storage, highlighting integration with AWS services like S3, Lambda, and DynamoDB.
+
+```mermaid
+graph TD;
+    User -->|Request| API_Gateway;
+    API_Gateway -->|REST| Model_Invocation_Service;
+    API_Gateway -->|REST| Document_Processing_Service;
+    API_Gateway -->|REST| Vectorization_Service;
+    API_Gateway -->|REST| Prompt_Management_Service;
+    Model_Invocation_Service -->|Data| DynamoDB;
+    Document_Processing_Service -->|Data| S3;
+    Vectorization_Service -->|Data| OpenSearch;
+    Prompt_Management_Service -->|Data| DynamoDB;
+    Admin_UI -->|HTTP| Admin_Backend_Service;
+    Admin_Backend_Service -->|REST| API_Gateway;
+    CloudFront -->|CDN| Admin_UI;
+    WAF -->|Security| CloudFront;
+    IAM -->|Security| All_Services;
+    KMS -->|Encryption| All_Services;
+    ElastiCache -->|Cache| Model_Invocation_Service;
+```
 
 ### Technology Stack
 - **AWS S3**: For scalable storage solutions.
@@ -268,4 +287,4 @@ Please refer to the `CONTRIBUTING.md` file for guidelines on contributing to thi
 ## References
 
 - [AWS Documentation](https://aws.amazon.com/documentation/)
-- [Nuxt.js Documentation](https://nuxt.com/docs/getting-started/introduction) 
+- [Nuxt.js Documentation](https://nuxt.com/docs/getting-started/introduction)
